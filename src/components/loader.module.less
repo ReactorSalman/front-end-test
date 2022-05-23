@@ -1,0 +1,26 @@
+@import (reference) "../less/styled-components.include.less";
+
+.home-loader {
+    display: block;   
+    position: absolute;   
+    width: 10px;   
+    height: 10px;   
+    left: calc(50% - 1em);
+    top: 50%; 
+	border: 16px solid #fff;
+	border-top: 16px solid @virgin-red;
+	border-radius: 50%;
+	width: 70px;
+	height: 70px;
+	animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}

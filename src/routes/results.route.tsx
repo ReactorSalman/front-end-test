@@ -1,15 +1,21 @@
-import { h, JSX } from 'preact'
+import { h, JSX } from "preact"
 import { useRouter } from "preact-router";
-import { useEffect } from 'preact/hooks';
-import SearchComponent from '../components/search.component';
-import { doRequest } from '../services/http.service';
-import { BookingRequest, BookingResponse } from '../types/booking';
-import { DateTime } from 'luxon';
+import { useEffect, useState } from "preact/hooks";
+import SearchComponent from "../components/search.component";
+import { doRequest } from "../services/http.service";
+import { BookingRequest, BookingResponse, Holiday } from "../types/booking";
+import { DateTime } from "luxon";
+import SearchResult from "../components/searchResult.component";
+import { LoaderComponent } from "../components/loader.component";
 
 export default function ResultsRoute(): JSX.Element {
     const [searchParams] = useRouter();
+    const [holidays, setHolidays] = useState<Holiday[][]>([]);
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         const departureDate = DateTime.fromFormat(searchParams?.matches?.departureDate, "yyyy-MM-dd").toFormat("dd-MM-yyyy");
         const requestBody: BookingRequest = {
             "bookingType": "holiday",
@@ -26,19 +32,32 @@ export default function ResultsRoute(): JSX.Element {
             ]
         }
 
-        doRequest('POST', '/cjs-search-api/search', requestBody)
+        doRequest("POST", "/cjs-search-api/search", requestBody)
             .then((response: unknown | BookingResponse) => {
-                // Results are loaded here
-                console.log(response)
+                setLoading(false);
+                return setHolidays([response?.holidays]);
+            }).catch((err) => {
+                setLoading(false);
+                setError(err?.response?.data?.errors[0]);
             })
     }, [searchParams])
 
-
     return (
         <section>
-            <SearchComponent />
-
-            <h1>Results should display here.</h1>
+            {loading ? (
+				<LoaderComponent />
+			) : (
+				<div>
+                    <SearchComponent />
+					{holidays.length >= 1
+						? (
+							<SearchResult holidays={holidays[0]} />
+						)
+						:
+						<h4>{error && <label>{error}</label>}</h4>
+					}
+				</div>
+			)}
         </section>
     )
 }

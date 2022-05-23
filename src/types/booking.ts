@@ -28,11 +28,17 @@ export interface Holiday {
     hotel: Hotel
 }
 
+interface TripAdvisor {
+	numReviews: number
+	ratingImageUrl: string
+};
+
 export interface Hotel {
     id: string
     name: string
     boardBasis: string
     content: HotelContent
+    tripAdvisor: TripAdvisor
 }
 
 export interface HotelContent {
@@ -47,7 +53,7 @@ export interface HotelContent {
    hotelLocation: string[]
    accommodationType: string[]
    hotelFacilities: string[]
-   starRating: number | string
+   starRating: string
    propertyType: string
 }
 
