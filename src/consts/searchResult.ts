@@ -30,10 +30,10 @@ const ratings: RatingAndFacilitiesType[] = [
 ];
 
 const pricePerPerson: PricePerPersonType[] = [
-	{ label: "Less than $1000", value: "1", isChecked: false, name: "price1", min: "0", max: "1000" },
-	{ label: "$1000 to $2000", value: "2", isChecked: false, name: "price2", min: "1000", max: "2000" },
-	{ label: "$2000 to $3000", value: "3", isChecked: false, name: "price3", min: "2000", max: "3000" },
-	{ label: "Greater than $3000", value: "4", isChecked: false, name: "price4", min: "3000", max: "100000" },
+	{ label: "Less than £1000", value: "1", isChecked: false, name: "price1", min: "0", max: "1000" },
+	{ label: "£1000 to £2000", value: "2", isChecked: false, name: "price2", min: "1000", max: "2000" },
+	{ label: "£2000 to £3000", value: "3", isChecked: false, name: "price3", min: "2000", max: "3000" },
+	{ label: "Greater than £3000", value: "4", isChecked: false, name: "price4", min: "3000", max: "100000" },
 ];
 
 const facilities: RatingAndFacilitiesType[] = [
