@@ -44,11 +44,11 @@ export default function ResultsRoute(): JSX.Element {
 
     return (
         <section>
+            <SearchComponent />
             {loading ? (
 				<LoaderComponent />
 			) : (
 				<div>
-                    <SearchComponent />
 					{holidays.length >= 1
 						? (
 							<SearchResult holidays={holidays[0]} />
